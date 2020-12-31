@@ -64,7 +64,6 @@ namespace TestFormsRenderer
             int yLenght = pixels.GetLength(1);
             int xLenghtMunus = yLenght - 1;
             int yLanghtMunus = xLenght - 1;
-            bool findFirst = false;
             for (int y = xLenghtMunus; y >= 0; y--)
             for (int x = 0; x < xLenght; x++)
             {
@@ -88,23 +87,25 @@ namespace TestFormsRenderer
                     moved = true;
                     continue;
                 }
-                
-                if (!pixels[x - 1, yPlus].Color)
+
+                int xMunus = x - 1;
+                if (!pixels[xMunus, yPlus].Color)
                 {
                     pixels[x, y].Color = false;
                     pixels[x, y].Ticked = true;
-                    pixels[x - 1, yPlus].Color = true;
-                    pixels[x - 1, yPlus].Ticked = true;
+                    pixels[xMunus, yPlus].Color = true;
+                    pixels[xMunus, yPlus].Ticked = true;
                     moved = true;
                     continue;
                 }
 
-                if (!pixels[x + 1, yPlus].Color)
+                int xPlus = x + 1;
+                if (!pixels[xPlus, yPlus].Color)
                 {
                     pixels[x, y].Color = false;
                     pixels[x, y].Ticked = true;
-                    pixels[x + 1, yPlus].Color = true;
-                    pixels[x + 1, yPlus].Ticked = true;
+                    pixels[xPlus, yPlus].Color = true;
+                    pixels[xPlus, yPlus].Ticked = true;
                     moved = true;
                 }
             }
@@ -131,12 +132,12 @@ namespace TestFormsRenderer
             {
                 if (pixels[x, y].Ticked)
                 {
-                    bmp.SetPixel(x, y, pixels[x, y].Color ? Color.Black : Color.White);
+                    bmp.SetPixel(x, y, pixels[x, y].Color ? -16777216 : -1);
                     pixels[x, y].Ticked = false;
                 }
                 else if (Cached)
                 {
-                    bmp.SetPixel(x, y, pixels[x, y].Color ? Color.Black : Color.White);
+                    bmp.SetPixel(x, y, pixels[x, y].Color ? -16777216 : -1);
                     pixels[x, y].Ticked = false;
                 }
             }
