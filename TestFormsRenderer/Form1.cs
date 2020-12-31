@@ -132,12 +132,12 @@ namespace TestFormsRenderer
             {
                 if (pixels[x, y].Ticked)
                 {
-                    bmp.SetPixel(x, y, pixels[x, y].Color ? -16777216 : -1);
+                    bmp.SetPixel(x, y, pixels[x, y].Color ? Color.Black : Color.White);
                     pixels[x, y].Ticked = false;
                 }
                 else if (Cached)
                 {
-                    bmp.SetPixel(x, y, pixels[x, y].Color ? -16777216 : -1);
+                    bmp.SetPixel(x, y, pixels[x, y].Color ? Color.Black : Color.White);
                     pixels[x, y].Ticked = false;
                 }
             }
