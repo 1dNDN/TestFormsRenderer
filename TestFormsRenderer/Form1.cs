@@ -35,7 +35,6 @@ namespace TestFormsRenderer
 
             long displayTicks = 0;
             long tickTicks = 0;
-            
             while (moved)
             {
                 moved = false;
@@ -65,8 +64,8 @@ namespace TestFormsRenderer
             int yLenght = pixels.GetLength(1);
             int xLenghtMunus = yLenght - 1;
             int yLanghtMunus = xLenght - 1;
-
-            for (int y = yLanghtMunus; y >= 0; y--)
+            bool findFirst = false;
+            for (int y = xLenghtMunus; y >= 0; y--)
             for (int x = 0; x < xLenght; x++)
             {
                 if (!pixels[x, y].Color)
