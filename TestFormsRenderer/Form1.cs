@@ -16,7 +16,6 @@ namespace TestFormsRenderer
 
         public bool IsAnimationRunning;
         public DirectBitmap bmp;
-        private object lockObject = new object();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -75,32 +74,33 @@ namespace TestFormsRenderer
                     continue;
                 if (y == yLenght - 1)
                     continue;
-                if (!pixels[x, y + 1].Color)
+                int yPlus = y + 1;
+                if (!pixels[x, yPlus].Color)
                 {
                     pixels[x, y].Color = false;
                     pixels[x, y].Ticked = true;
-                    pixels[x, y + 1].Color = true;
-                    pixels[x, y + 1].Ticked = true;
+                    pixels[x, yPlus].Color = true;
+                    pixels[x, yPlus].Ticked = true;
                     moved = true;
                     continue;
                 }
 
-                if (!pixels[x - 1, y + 1].Color)
+                if (!pixels[x - 1, yPlus].Color)
                 {
                     pixels[x, y].Color = false;
                     pixels[x, y].Ticked = true;
-                    pixels[x - 1, y + 1].Color = true;
-                    pixels[x - 1, y + 1].Ticked = true;
+                    pixels[x - 1, yPlus].Color = true;
+                    pixels[x - 1, yPlus].Ticked = true;
                     moved = true;
                     continue;
                 }
 
-                if (!pixels[x + 1, y + 1].Color)
+                if (!pixels[x + 1, yPlus].Color)
                 {
                     pixels[x, y].Color = false;
                     pixels[x, y].Ticked = true;
-                    pixels[x + 1, y + 1].Color = true;
-                    pixels[x + 1, y + 1].Ticked = true;
+                    pixels[x + 1, yPlus].Color = true;
+                    pixels[x + 1, yPlus].Ticked = true;
                     moved = true;
                 }
             }
@@ -116,6 +116,8 @@ namespace TestFormsRenderer
                     pixels[x, y] = new Pixel();
         }
 
+        DateTime lastUpdate = DateTime.Now;
+        
         private void DisplayPixelArray(ref Pixel[,] pixels, bool Cached = false)
         {
             for (int x = 0; x < pixels.GetLength(0); x++)
@@ -133,7 +135,11 @@ namespace TestFormsRenderer
                 }
             }
             
-            pictureBox1.Image = bmp.Bitmap;
+            if((DateTime.Now - lastUpdate).Milliseconds > 30)
+            {
+                lastUpdate = DateTime.Now; 
+                pictureBox1.Image = bmp.Bitmap;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
