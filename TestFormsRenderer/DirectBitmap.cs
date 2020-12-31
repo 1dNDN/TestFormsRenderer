@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace TestFormsRenderer
@@ -16,6 +17,7 @@ namespace TestFormsRenderer
 
         protected GCHandle BitsHandle { get; }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DirectBitmap(int width, int height)
         {
             Width = width;
@@ -26,6 +28,7 @@ namespace TestFormsRenderer
                 BitsHandle.AddrOfPinnedObject());
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPixel(int x, int y, Color colour)
         {
             int index = x + y * Width;
@@ -34,6 +37,7 @@ namespace TestFormsRenderer
             Bits[index] = col;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Color GetPixel(int x, int y)
         {
             int index = x + y * Width;
@@ -43,6 +47,7 @@ namespace TestFormsRenderer
             return result;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Dispose()
         {
             if (Disposed) return;
