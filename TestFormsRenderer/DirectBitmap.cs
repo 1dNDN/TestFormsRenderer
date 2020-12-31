@@ -38,6 +38,12 @@ namespace TestFormsRenderer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetPixel(int x, int y, int colour)
+        {
+            Bits[x + y * Width] = colour;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Color GetPixel(int x, int y)
         {
             int index = x + y * Width;
