@@ -58,7 +58,7 @@ namespace TestFormsRenderer
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void TickSimulation(ref Pixel[,] pixels, ref bool moved)
+        private static unsafe void TickSimulation(ref Pixel[,] pixels, ref bool moved)
         {
             int xLenght = pixels.GetLength(0);
             int yLenght = pixels.GetLength(1);
@@ -112,7 +112,7 @@ namespace TestFormsRenderer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void FillPixelArray(int xMin, int xMax, int yMin, int yMax, ref Pixel[,] pixels)
+        private static unsafe void FillPixelArray(int xMin, int xMax, int yMin, int yMax, ref Pixel[,] pixels)
         {
             for (int x = 0; x < pixels.GetLength(0); x++)
             for (int y = 0; y < pixels.GetLength(1); y++)
@@ -125,7 +125,7 @@ namespace TestFormsRenderer
         DateTime lastUpdate = DateTime.Now;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisplayPixelArray(ref Pixel[,] pixels, bool Cached = false)
+        private unsafe void DisplayPixelArray(ref Pixel[,] pixels, bool Cached = false)
         {
             for (int x = 0; x < pixels.GetLength(0); x++)
             for (int y = 0; y < pixels.GetLength(1); y++)

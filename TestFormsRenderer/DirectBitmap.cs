@@ -29,7 +29,7 @@ namespace TestFormsRenderer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPixel(int x, int y, Color colour)
+        public unsafe void SetPixel(int x, int y, Color colour)
         {
             int index = x + y * Width;
             int col = colour.ToArgb();
@@ -38,7 +38,7 @@ namespace TestFormsRenderer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPixel(int x, int y, int colour)
+        public unsafe void SetPixel(int x, int y, int colour)
         {
             Bits[x + y * Width] = colour;
         }
